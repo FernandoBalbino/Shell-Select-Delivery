@@ -1,0 +1,4 @@
+1 texto principal rgb(48, 48, 48)
+2 texto secundario	rgb(87, 87, 87)
+background-color: rgb(242, 242, 242);
+cor texto rgb(87, 87, 87);
