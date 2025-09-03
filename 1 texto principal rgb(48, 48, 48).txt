@@ -1,4 +1,4 @@
-1 texto principal rgb(48, 48, 48)
-2 texto secundario	rgb(87, 87, 87)
-background-color: rgb(242, 242, 242);
-cor texto rgb(87, 87, 87);
+1 texto principal #303030ff
+2 texto secundario	#575757ff
+background-color: #f2f2f2ff;
+cor texto #575757ff;
