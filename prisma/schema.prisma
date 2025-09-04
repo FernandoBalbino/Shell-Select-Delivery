@@ -26,6 +26,7 @@ model Product {
   createdAt DateTime @default(now())
   image String
   description String?
+  category  String@default("lanche")
 }
 
 model Order {

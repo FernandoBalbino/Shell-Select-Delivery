@@ -6,6 +6,7 @@ interface Product {
   price: number;
   image: string;
   description: string | null;
+  category: string | null;
 }
 
 export default async function ListProducts() {
@@ -16,6 +17,7 @@ export default async function ListProducts() {
       price: true,
       image: true,
       description: true,
+      category: true,
     },
   });
   return produtos;
