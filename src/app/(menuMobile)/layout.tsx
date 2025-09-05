@@ -8,7 +8,9 @@ export default function MenuMobileFixed({
   return (
     <div>
       {children}
-      <MenuMobile />
+      <header>
+        <MenuMobile />
+      </header>
     </div>
   );
 }

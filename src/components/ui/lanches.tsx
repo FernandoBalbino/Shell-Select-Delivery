@@ -13,13 +13,13 @@ import { IoAddSharp } from "react-icons/io5";
 
 import ListProducts from "../functions/listproducts";
 export default async function LanchesPopulares() {
-  const lanches = await ListProducts();
+  const lanches = await ListProducts("lanche");
 
   return (
     <>
       <article className="">
         <div className="px-4   py-6">
-          <h2 className="text-xl font-bold mb-4">Populares</h2>
+          <h2 className="text-xl font-bold mb-4">Lanches Populares</h2>
           <Carousel
             opts={{
               align: "start",

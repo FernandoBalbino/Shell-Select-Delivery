@@ -9,8 +9,9 @@ interface Product {
   category: string | null;
 }
 
-export default async function ListProducts() {
+export default async function ListProducts(category?: string) {
   const produtos: Product[] = await prisma.product.findMany({
+    where: category ? { category } : undefined,
     select: {
       id: true,
       name: true,

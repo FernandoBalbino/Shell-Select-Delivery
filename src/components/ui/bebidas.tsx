@@ -12,14 +12,14 @@ import { Button } from "./button";
 import { IoAddSharp } from "react-icons/io5";
 
 import ListProducts from "../functions/listproducts";
-export default async function LanchesPopulares() {
-  const lanches = await ListProducts();
+export default async function BebidasPopulares() {
+  const lanches = await ListProducts("bebida");
 
   return (
     <>
       <article className="">
         <div className="px-4   py-6">
-          <h2 className="text-xl font-bold mb-4">Populares</h2>
+          <h2 className="text-xl font-bold mb-4">Bebidas Populares</h2>
           <Carousel
             opts={{
               align: "start",
@@ -41,6 +41,7 @@ export default async function LanchesPopulares() {
                         width={180}
                         height={180}
                         className="w-full h-full object-contain "
+                        loading="lazy"
                       />
                     </div>
                     <h3 className="text-base content-start w-full font-semibold">
