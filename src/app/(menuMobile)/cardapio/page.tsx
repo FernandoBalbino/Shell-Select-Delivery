@@ -1,7 +1,17 @@
-export default function Cardapio() {
+"use cache";
+import CategoriasComidas from "./categorias";
+
+export default async function Cardapio() {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const res = await fetch(`${baseUrl}/api`, {
+    cache: "force-cache",
+    next: { revalidate: 120 },
+  });
+  const produtos = await res.json();
+
   return (
     <>
-      <div>teste caradaprio</div>
+      <CategoriasComidas produtos={produtos} />'
     </>
   );
 }

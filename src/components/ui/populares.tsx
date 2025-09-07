@@ -1,5 +1,7 @@
+"use client";
 import Image from "next/image";
-import { genericBlur } from "./base64";
+import { useState } from "react";
+import { Product } from "@/components/functions/listproducts";
 import {
   Carousel,
   CarouselContent,
@@ -7,13 +9,19 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
+interface lanchesPopularesProps {
+  produtos: Product[];
+}
 import { Button } from "./button";
 import { IoAddSharp } from "react-icons/io5";
+export const revalidate = 600;
 
-import ListProducts from "../functions/listproducts";
-export default async function LanchesPopulares() {
-  const lanches = await ListProducts();
+export default function LanchesPopulares({ produtos }: lanchesPopularesProps) {
+  const [visibleCount, setVisibleCount] = useState(5);
+  if (!produtos || produtos.length === 0) {
+    return <div>Carregando lanches populares...</div>;
+  }
+  const produtosVisiveis = produtos.slice(0, visibleCount);
 
   return (
     <>
@@ -28,7 +36,7 @@ export default async function LanchesPopulares() {
             className="w-full relative "
           >
             <CarouselContent>
-              {lanches.map((lanche, index) => (
+              {produtosVisiveis.map((lanche, index) => (
                 <CarouselItem
                   key={index}
                   className="basis-[60%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
@@ -69,6 +77,16 @@ export default async function LanchesPopulares() {
             <CarouselPrevious className="left-2 top-1/2 -translate-y-1/2 z-10" />
             <CarouselNext className="right-2 top-1/2 -translate-y-1/2 z-10" />
           </Carousel>
+          {visibleCount < produtos.length && (
+            <div className="flex justify-center mt-4">
+              <button
+                className="px-4 py-2 bg-[#F38808] text-white rounded-lg"
+                onClick={() => setVisibleCount(visibleCount + 5)}
+              >
+                Ver mais
+              </button>
+            </div>
+          )}
         </div>
       </article>
     </>

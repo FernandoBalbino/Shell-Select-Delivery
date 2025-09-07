@@ -1,9 +1,22 @@
+"use cache";
 import Image from "next/image";
 import BebidasPopulares from "@/components/ui/bebidas";
 import LanchesPopulares from "@/components/ui/populares";
 import Lanches from "@/components/ui/lanches";
 import { Suspense } from "react";
-export default function Home() {
+export default async function Home() {
+  // Busca os produtos pela API, aproveitando o cache do Next.js
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const res = await fetch(`${baseUrl}/api`, {
+    cache: "force-cache",
+    next: {
+      revalidate: 600,
+    },
+  });
+  const produtos = await res.json();
+  const bebidas = produtos.filter((p: any) => p.category === "bebida");
+  const lanches = produtos.filter((p: any) => p.category === "lanche");
+
   return (
     <>
       <div className="border-b-1 justify-between px-3 bg-white items-center flex border-[#f7f7f7]">
@@ -47,13 +60,13 @@ export default function Home() {
       </section>
 
       <section>
-        <LanchesPopulares />
+        <LanchesPopulares produtos={produtos} />
       </section>
       <section>
-        <BebidasPopulares />
+        <BebidasPopulares produtos={bebidas} />
       </section>
       <section>
-        <Lanches />
+        <Lanches produtos={lanches} />
       </section>
     </>
   );
