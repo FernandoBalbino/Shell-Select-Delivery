@@ -3,7 +3,7 @@ import Image from "next/image";
 import BebidasPopulares from "@/components/ui/bebidas";
 import LanchesPopulares from "@/components/ui/populares";
 import Lanches from "@/components/ui/lanches";
-import { Suspense } from "react";
+
 export default async function Home() {
   // Busca os produtos pela API, aproveitando o cache do Next.js
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";

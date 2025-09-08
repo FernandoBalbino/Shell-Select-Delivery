@@ -26,11 +26,20 @@ export default function BebidasPopulares({ produtos }: BebidasPopularesProps) {
     <>
       <article className="">
         <div className="px-4   py-6">
-          <h2 className="text-xl font-bold mb-4">Bebidas Populares</h2>
+          <h2 className="text-xl flex items-center justify-between font-bold mb-4">
+            Bebidas Populares
+            {visibleCount < produtos.length && (
+              <button
+                className=" text-[#F38808] cursor-pointer "
+                onClick={() => setVisibleCount(visibleCount + 5)}
+              >
+                Ver mais
+              </button>
+            )}
+          </h2>
           <Carousel
             opts={{
               align: "start",
-              loop: true,
             }}
             className="w-full relative "
           >
@@ -77,16 +86,6 @@ export default function BebidasPopulares({ produtos }: BebidasPopularesProps) {
             <CarouselPrevious className="left-2 top-1/2 -translate-y-1/2 z-10" />
             <CarouselNext className="right-2 top-1/2 -translate-y-1/2 z-10" />
           </Carousel>
-          {visibleCount < produtos.length && (
-            <div className="flex justify-center mt-4">
-              <button
-                className="px-4 py-2 bg-[#F38808] text-white rounded-lg"
-                onClick={() => setVisibleCount(visibleCount + 5)}
-              >
-                Ver mais
-              </button>
-            </div>
-          )}
         </div>
       </article>
     </>
