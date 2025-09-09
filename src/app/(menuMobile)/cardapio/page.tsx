@@ -1,6 +1,6 @@
 "use cache";
 import CategoriasComidas from "./categorias";
-
+import SecoesCardapio from "./secoes";
 export default async function Cardapio() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   const res = await fetch(`${baseUrl}/api`, {
@@ -11,7 +11,8 @@ export default async function Cardapio() {
 
   return (
     <>
-      <CategoriasComidas produtos={produtos} />'
+      <CategoriasComidas />
+      <SecoesCardapio produtos={produtos} />
     </>
   );
 }

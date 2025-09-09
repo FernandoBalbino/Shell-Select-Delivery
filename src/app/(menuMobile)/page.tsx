@@ -10,7 +10,7 @@ export default async function Home() {
   const res = await fetch(`${baseUrl}/api`, {
     cache: "force-cache",
     next: {
-      revalidate: 600,
+      revalidate: 120,
     },
   });
   const produtos = await res.json();
