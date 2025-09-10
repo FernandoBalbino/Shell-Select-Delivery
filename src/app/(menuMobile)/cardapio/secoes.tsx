@@ -41,7 +41,7 @@ export default function SecoesCardapio({ produtos }: SecoesCardapioProps) {
 
   return (
     <>
-      <article className="">
+      <article id="energeticos" className="">
         <div className="px-4   py-6">
           <h2 className="text-xl flex items-center justify-between font-bold mb-4">
             Energéticos
@@ -104,7 +104,7 @@ export default function SecoesCardapio({ produtos }: SecoesCardapioProps) {
           </Carousel>
         </div>
       </article>
-      <article className="">
+      <article id="lanches" className="">
         <div className="px-4   py-6">
           <h2 className="text-xl flex items-center justify-between font-bold mb-4">
             Lanches
@@ -167,7 +167,7 @@ export default function SecoesCardapio({ produtos }: SecoesCardapioProps) {
           </Carousel>
         </div>
       </article>
-      <article className="">
+      <article id="cervejas" className="">
         <div className="px-4   py-6">
           <h2 className="text-xl flex items-center justify-between font-bold mb-4">
             Cervejas
@@ -230,7 +230,7 @@ export default function SecoesCardapio({ produtos }: SecoesCardapioProps) {
           </Carousel>
         </div>
       </article>
-      <article className="">
+      <article id="chocolates" className="">
         <div className="px-4   py-6">
           <h2 className="text-xl flex items-center justify-between font-bold mb-4">
             Chocolates
@@ -293,7 +293,7 @@ export default function SecoesCardapio({ produtos }: SecoesCardapioProps) {
           </Carousel>
         </div>
       </article>
-      <article className="">
+      <article id="bebidas" className="">
         <div className="px-4   py-6">
           <h2 className="text-xl flex items-center justify-between font-bold mb-4">
             Bebidas
@@ -356,7 +356,7 @@ export default function SecoesCardapio({ produtos }: SecoesCardapioProps) {
           </Carousel>
         </div>
       </article>
-      <article className="">
+      <article id="expressos" className="">
         <div className="px-4   py-6">
           <h2 className="text-xl flex items-center justify-between font-bold mb-4">
             Expressos

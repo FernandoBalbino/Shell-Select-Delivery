@@ -1,13 +1,11 @@
 "use cache";
 import CategoriasComidas from "./categorias";
 import SecoesCardapio from "./secoes";
+import ListProducts from "@/components/functions/listproducts";
+
 export default async function Cardapio() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const res = await fetch(`${baseUrl}/api`, {
-    cache: "force-cache",
-    next: { revalidate: 120 },
-  });
-  const produtos = await res.json();
+  // ✅ Chama diretamente a função otimizada
+  const produtos = await ListProducts();
 
   return (
     <>

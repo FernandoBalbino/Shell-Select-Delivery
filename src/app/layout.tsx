@@ -1,21 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/ui/footer";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   weight: "400",
   variable: "--font-plus-jakarta-sans",
+  subsets: ["latin"],
+});
+
+export const barlowCondensed = Barlow_Condensed({
+  weight: "700",
+  variable: "--font-barlow-condensed",
   subsets: ["latin"],
 });
 
@@ -31,7 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={` ${plusJakartaSans.variable}  antialiased`}>
+      <body
+        className={` ${plusJakartaSans.variable} ${barlowCondensed.variable}  antialiased`}
+      >
         {children}
         <Footer />
       </body>

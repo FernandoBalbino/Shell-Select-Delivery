@@ -30,7 +30,7 @@ export default function CategoriasComidas() {
         </div>
       </div>
       <div className="px-4 py-1">
-        <h2 className="text-[24px] text-[#3e3e3e] font-bold mb-3">
+        <h2 className={`text-[28px] barlow  text-[#3e3e3e] font-bold mb-3`}>
           Categorias
         </h2>
         <p className="text-gray-600 mb-4">
@@ -50,7 +50,7 @@ export default function CategoriasComidas() {
                 href="#energeticos"
                 className="flex flex-col items-center group"
               >
-                <div className="w-30 h-30 bg-amber-200 flex items-center justify-center rounded-3xl shadow-sm group-hover:scale-105 transition-transform">
+                <div className="w-30 h-30 bg-gradient-to-bl from-yellow-400 to-orange-500 flex items-center justify-center rounded-3xl shadow-sm group-hover:scale-105 transition-transform">
                   <Image
                     src="/redbull250ml.png"
                     alt="Energético"
@@ -66,7 +66,7 @@ export default function CategoriasComidas() {
             </CarouselItem>
             <CarouselItem className="basis-1/3 mr-2 px-2">
               <a href="#cervejas" className="flex flex-col items-center group">
-                <div className="w-30 h-30 bg-amber-200 flex items-center justify-center rounded-3xl shadow-sm group-hover:scale-105 transition-transform">
+                <div className="w-30 h-30 bg-gradient-to-bl from-yellow-400 to-orange-500 flex items-center justify-center rounded-3xl shadow-sm group-hover:scale-105 transition-transform">
                   <Image
                     src="/itaipava.png"
                     alt="Cervejas"
@@ -82,7 +82,7 @@ export default function CategoriasComidas() {
             </CarouselItem>
             <CarouselItem className="basis-1/3 mr-2 px-2">
               <a href="#bebidas" className="flex flex-col items-center group">
-                <div className="w-30 h-30 flex items-center justify-center bg-amber-200 rounded-3xl shadow-sm group-hover:scale-105 transition-transform">
+                <div className="w-30 h-30 flex items-center justify-center bg-gradient-to-bl from-yellow-400 to-orange-500 rounded-3xl shadow-sm group-hover:scale-105 transition-transform">
                   <Image
                     src="/cocacolalata.png"
                     alt="Expressos"
@@ -98,7 +98,7 @@ export default function CategoriasComidas() {
             </CarouselItem>
             <CarouselItem className="basis-1/3 mr-2 px-2">
               <a href="#expressos" className="flex flex-col items-center group">
-                <div className="w-30 h-30 flex items-center justify-center bg-amber-200 rounded-3xl shadow-sm group-hover:scale-105 transition-transform">
+                <div className="w-30 h-30 flex items-center justify-center bg-gradient-to-bl from-yellow-400 to-orange-500 rounded-3xl shadow-sm group-hover:scale-105 transition-transform">
                   <Image
                     src="/expressos.png"
                     alt="Expressos"
@@ -114,7 +114,7 @@ export default function CategoriasComidas() {
             </CarouselItem>
             <CarouselItem className="basis-1/3 px-2">
               <a href="#lanches" className="flex flex-col items-center group">
-                <div className="w-30 h-30 flex items-center justify-center bg-amber-200 rounded-3xl shadow-sm group-hover:scale-105 transition-transform">
+                <div className="w-30 h-30 flex items-center justify-center bg-gradient-to-bl from-yellow-400 to-orange-500 rounded-3xl shadow-sm group-hover:scale-105 transition-transform">
                   <Image
                     src="/calabresa.png"
                     alt="Lanches"
@@ -133,7 +133,7 @@ export default function CategoriasComidas() {
                 href="#chocolates"
                 className="flex flex-col items-center group"
               >
-                <div className="w-30 h-30 flex items-center justify-center bg-amber-200 rounded-3xl shadow-sm group-hover:scale-105 transition-transform">
+                <div className="w-30 h-30 flex items-center justify-center bg-gradient-to-bl from-yellow-400 to-orange-500 rounded-3xl shadow-sm group-hover:scale-105 transition-transform">
                   <Image
                     src="/chocolates.png"
                     alt="Chocolates"
