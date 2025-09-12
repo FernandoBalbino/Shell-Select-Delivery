@@ -1,0 +1,22 @@
+# Dependências
+node_modules/
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+
+# Arquivos gerados pelo Prisma (causa dos warnings)
+src/generated/
+prisma/generated/
+**/runtime/
+**/*.wasm.js
+**/wasm-engine-edge.js
+
+# Outros arquivos gerados
+*.config.js
+next.config.js
+
+# Cache
+.eslintcache
