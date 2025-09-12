@@ -1,12 +1,13 @@
-import { PrismaClient } from "@/generated/prisma/client";
+import { PrismaClient } from "@prisma/client";
 
-declare global {
-  // Garantir que Prisma não crie múltiplas instâncias em HMR
-  // Isso evita erros no Next.js com hot reload
-  // @ts-ignore
-  // var prisma: PrismaClient | undefined;
-}
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined;
+};
 
-const prisma = new PrismaClient();
+const prisma = globalForPrisma.prisma ?? new PrismaClient();
+
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
 export default prisma;
+
+// Remova qualquer linha com @ts-ignore

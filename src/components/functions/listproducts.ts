@@ -36,7 +36,7 @@ const getCachedProducts = unstable_cache(
   },
   ["products"], // Cache key
   {
-    revalidate: 300, // 5 minutos
+    revalidate: 120, // 5 minutos
     tags: ["products"], // Para invalidação manual
   }
 );

@@ -39,6 +39,7 @@ export default function MenuMobileFixed() {
               <li key={item.href}>
                 <Link
                   href={item.href}
+                  prefetch
                   onClick={() => setClicked(item.href)}
                   className={clsx(
                     "flex flex-col items-center transition-colors",

@@ -1,5 +1,3 @@
-export const revalidate = 120;
-
 import { NextResponse } from "next/server";
 import ListProducts from "@/components/functions/listproducts";
 
