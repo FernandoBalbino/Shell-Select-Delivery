@@ -1,4 +1,3 @@
-import MenuMobile from "./ui/menuMobile";
 export default function Teste() {
   return (
     <>

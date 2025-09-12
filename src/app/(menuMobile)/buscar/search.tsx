@@ -21,7 +21,7 @@ export default function Search({ produtos }: propsProdutos) {
       .trim()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
-    const produto = produtos.filter((p: any) => {
+    const produto = produtos.filter((p: Product) => {
       return p.name
         .toLowerCase()
         .normalize("NFD")
