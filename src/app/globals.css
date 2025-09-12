@@ -76,7 +76,29 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  color-scheme: light;
+  color-scheme: light !important;
+}
+
+/* Força o tema claro em todos os elementos */
+html,
+body {
+  color-scheme: light !important;
+  background-color: white !important;
+  color: #1a1a1a !important;
+}
+
+/* Previne que o navegador aplique dark mode */
+@media (prefers-color-scheme: dark) {
+  html,
+  body {
+    color-scheme: light !important;
+    background-color: white !important;
+    color: #1a1a1a !important;
+  }
+
+  :root {
+    color-scheme: light !important;
+  }
 }
 
 .dark {
@@ -119,6 +141,27 @@
   }
   body {
     @apply bg-background text-foreground;
+    color-scheme: light !important;
+    background-color: white !important;
+  }
+
+  /* Força tema claro em todos os elementos */
+  *,
+  *::before,
+  *::after {
+    color-scheme: light !important;
+  }
+
+  /* Previne dark mode em elementos específicos */
+  div,
+  section,
+  article,
+  header,
+  footer,
+  main,
+  nav,
+  aside {
+    color-scheme: light !important;
   }
 }
 
