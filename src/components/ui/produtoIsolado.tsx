@@ -20,6 +20,7 @@ export default function ProdutoIsolado({ produto }: ProdutoIsoladoProps) {
               width={250}
               height={250}
               alt={produto.name}
+              priority={true}
             />
           </Suspense>
         </div>
