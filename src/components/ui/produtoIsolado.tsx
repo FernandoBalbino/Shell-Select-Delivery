@@ -1,7 +1,7 @@
 // produtoIsolado.tsx
 import { Product } from "../functions/listproducts";
 import Image from "next/image";
-
+import { Suspense } from "react";
 interface ProdutoIsoladoProps {
   produto: Product;
 }
@@ -13,13 +13,15 @@ export default function ProdutoIsolado({ produto }: ProdutoIsoladoProps) {
       <div className="bg-white   ">
         {/* Área da Imagem com Gradiente */}
         <div className="bg-gradient-to-bl from-yellow-400 to-orange-500 h-80 flex justify-center items-center relative rounded-b-4xl">
-          <Image
-            className="w-full object-contain h-[70%] drop-shadow-lg"
-            src={produto.image}
-            width={250}
-            height={250}
-            alt={produto.name}
-          />
+          <Suspense fallback={<div>carregando...</div>}>
+            <Image
+              className="w-full object-contain h-[70%] drop-shadow-lg"
+              src={produto.image}
+              width={250}
+              height={250}
+              alt={produto.name}
+            />
+          </Suspense>
         </div>
 
         {/* Conteúdo do Card */}
