@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -70,30 +71,39 @@ export default function Search({ produtos }: propsProdutos) {
             {result.map((lanche, index) => (
               <div
                 key={index}
-                className="rounded-lg bg-white border shadow-sm p-4 flex items-center gap-4"
+                className="rounded-lg bg-white border shadow-sm p-4 flex items-center gap-4 hover:shadow-md transition"
               >
-                <div className="w-20 h-20 flex-shrink-0 overflow-hidden">
-                  <Image
-                    src={lanche.image}
-                    alt={lanche.name}
-                    width={80}
-                    height={80}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
+                {/* Link cobre apenas imagem e nome */}
+                <Link
+                  href={`/produtos/${lanche.id}`}
+                  className="flex items-center gap-4 flex-1"
+                  prefetch={true}
+                >
+                  <div className="w-20 h-20 flex-shrink-0 overflow-hidden">
+                    <Image
+                      src={lanche.image}
+                      alt={lanche.name}
+                      width={80}
+                      height={80}
+                      className="w-full h-full object-contain"
+                      priority={true}
+                    />
+                  </div>
 
-                <div className="flex-1">
-                  <h3 className="text-base font-semibold mb-1">
-                    {lanche.name}
-                  </h3>
-                  <p className="text-lg font-bold text-black">
-                    {lanche.price.toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    })}
-                  </p>
-                </div>
+                  <div className="flex-1">
+                    <h3 className="text-base font-semibold mb-1">
+                      {lanche.name}
+                    </h3>
+                    <p className="text-lg font-bold text-black">
+                      {lanche.price.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </p>
+                  </div>
+                </Link>
 
+                {/* Botão fora do link */}
                 <Button
                   className="bg-[#F38808]  rounded-[15px] flex-shrink-0"
                   variant={"default"}

@@ -49,3 +49,6 @@ export default function ForceLightTheme() {
 
   return null; // Este componente não renderiza nada
 }
+
+
+

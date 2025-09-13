@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Product } from "@/components/functions/listproducts";
@@ -47,25 +48,33 @@ export default function BebidasPopulares({ produtos }: BebidasPopularesProps) {
               {produtosVisiveis.map((lanche, index) => (
                 <CarouselItem
                   key={index}
-                  className="basis-[60%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
+                  className="basis-[65%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                 >
-                  <div className="rounded-lg bg-white h-60 relative border shadow-sm p-4 flex flex-col items-center ">
-                    <div className="w-[150px] h-[150px] mb-2 overflow-hidden">
-                      <Image
-                        src={lanche.image}
-                        alt={lanche.name}
-                        width={180}
-                        height={180}
-                        className="w-full h-full object-contain "
-                        loading="lazy"
-                      />
-                    </div>
-                    <h3 className="text-base content-start w-full font-semibold">
-                      {lanche.name}
-                    </h3>
+                  <div className="rounded-lg h-66 relative border shadow-sm p-4 flex flex-col hover:shadow-md transition">
+                    {/* Link cobre apenas imagem e nome */}
+                    <Link
+                      href={`/produtos/${lanche.id}`}
+                      className="block flex-1"
+                      prefetch={true}
+                    >
+                      <div className="w-[180px] h-[160px] mb-2 overflow-hidden mx-auto">
+                        <Image
+                          src={lanche.image}
+                          alt={lanche.name}
+                          width={170}
+                          height={170}
+                          className="w-full h-full object-contain"
+                          priority={true}
+                        />
+                      </div>
+                      <h3 className="text-base font-semibold truncate">
+                        {lanche.name}
+                      </h3>
+                    </Link>
 
-                    <div className="text-sm font-bold mt-1 justify-between items-center w-full flex">
-                      <p className="text-[20px] text-black">
+                    {/* Linha com preço e botão sempre no mesmo nível */}
+                    <div className="mt-auto flex justify-between items-center w-full">
+                      <p className="text-[20px] text-black font-bold">
                         {lanche.price.toLocaleString("pt-BR", {
                           style: "currency",
                           currency: "BRL",
@@ -75,7 +84,7 @@ export default function BebidasPopulares({ produtos }: BebidasPopularesProps) {
                         className="bg-[#F38808] rounded-[15px]"
                         variant={"default"}
                       >
-                        <IoAddSharp size={50} />
+                        <IoAddSharp size={28} />
                       </Button>
                     </div>
                   </div>

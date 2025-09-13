@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Product } from "@/components/functions/listproducts";
@@ -9,85 +10,91 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-interface lanchesPopularesProps {
+interface LanchesPopularesProps {
   produtos: Product[];
 }
 import { Button } from "./button";
 import { IoAddSharp } from "react-icons/io5";
 export const revalidate = 600;
 
-export default function LanchesPopulares({ produtos }: lanchesPopularesProps) {
+export default function LanchesPopulares({ produtos }: LanchesPopularesProps) {
   const [visibleCount, setVisibleCount] = useState(5);
+
   if (!produtos || produtos.length === 0) {
-    return <div>Carregando lanches populares...</div>;
+    return <div>Carregando produtos populares...</div>;
   }
+
   const produtosVisiveis = produtos.slice(0, visibleCount);
 
   return (
-    <>
-      <article className="">
-        <div className="px-4   py-6">
-          <h2 className="text-xl flex items-center justify-between font-bold mb-4">
-            Populares
-            {visibleCount < produtos.length && (
-              <button
-                className=" text-[#F38808] cursor-pointer "
-                onClick={() => setVisibleCount(visibleCount + 5)}
+    <article>
+      <div className="px-4 py-6">
+        <h2 className="text-xl flex items-center justify-between font-bold mb-4">
+          Populares
+          {visibleCount < produtos.length && (
+            <button
+              className="text-[#F38808] cursor-pointer"
+              onClick={() => setVisibleCount(visibleCount + 5)}
+            >
+              Ver mais
+            </button>
+          )}
+        </h2>
+
+        <Carousel opts={{ align: "start" }} className="w-full relative">
+          <CarouselContent>
+            {produtosVisiveis.map((produto) => (
+              <CarouselItem
+                key={produto.id}
+                className="basis-[65%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
               >
-                Ver mais
-              </button>
-            )}
-          </h2>
-          <Carousel
-            opts={{
-              align: "start",
-            }}
-            className="w-full relative "
-          >
-            <CarouselContent>
-              {produtosVisiveis.map((lanche, index) => (
-                <CarouselItem
-                  key={index}
-                  className="basis-[60%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
-                >
-                  <div className="rounded-lg bg-white h-60 relative border shadow-sm p-4 flex flex-col items-center ">
-                    <div className="w-[150px] h-[150px] mb-2 overflow-hidden">
+                <div className="rounded-lg  h-66 relative border shadow-sm p-4 flex flex-col hover:shadow-md transition">
+                  {/* Link cobre apenas imagem e nome */}
+                  <Link
+                    href={`/produtos/${produto.id}`}
+                    className="block flex-1"
+                    prefetch={true}
+                  >
+                    <div className="w-[180px] h-[160px] mb-2 overflow-hidden mx-auto">
                       <Image
-                        src={lanche.image}
-                        alt={lanche.name}
-                        width={180}
-                        height={180}
-                        className="w-full h-full object-contain "
+                        src={produto.image}
+                        alt={produto.name}
+                        width={170}
+                        height={170}
+                        className="w-full h-full object-contain"
+                        priority={true}
                       />
                     </div>
-                    <h3 className="text-base content-start w-full font-semibold">
-                      {lanche.name}
+
+                    <h3 className="text-base font-semibold  truncate">
+                      {produto.name}
                     </h3>
+                  </Link>
 
-                    <div className="text-sm font-bold mt-1 justify-between items-center w-full flex">
-                      <p className="text-[20px] text-black">
-                        {lanche.price.toLocaleString("pt-BR", {
-                          style: "currency",
-                          currency: "BRL",
-                        })}
-                      </p>
-                      <Button
-                        className="bg-[#F38808] rounded-[15px]"
-                        variant={"default"}
-                      >
-                        <IoAddSharp size={50} />
-                      </Button>
-                    </div>
+                  {/* Linha com preço e botão sempre no mesmo nível */}
+                  <div className="mt-auto flex justify-between items-center w-full">
+                    <p className="text-[20px] text-black font-bold">
+                      {produto.price.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </p>
+                    <Button
+                      className="bg-[#F38808] rounded-[15px]"
+                      variant={"default"}
+                    >
+                      <IoAddSharp size={28} />
+                    </Button>
                   </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
 
-            <CarouselPrevious className="left-2 top-1/2 -translate-y-1/2 z-10" />
-            <CarouselNext className="right-2 top-1/2 -translate-y-1/2 z-10" />
-          </Carousel>
-        </div>
-      </article>
-    </>
+          <CarouselPrevious className="left-2 top-1/2 -translate-y-1/2 z-10" />
+          <CarouselNext className="right-2 top-1/2 -translate-y-1/2 z-10" />
+        </Carousel>
+      </div>
+    </article>
   );
 }

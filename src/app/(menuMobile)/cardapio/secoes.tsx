@@ -1,6 +1,7 @@
 "use client";
 
 import { Product } from "@/components/functions/listproducts";
+import Link from "next/link";
 interface SecoesCardapioProps {
   produtos: Product[];
 }
@@ -33,30 +34,37 @@ interface ProductItemProps {
 
 function ProductItem({ produto }: ProductItemProps) {
   return (
-    <CarouselItem className="basis-[60%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-      <div className="rounded-lg bg-white h-60 relative border shadow-sm p-4 flex flex-col items-center">
-        <div className="w-[150px] h-[150px] mb-2 overflow-hidden">
-          <Image
-            src={produto.image}
-            alt={produto.name}
-            width={180}
-            height={180}
-            loading="lazy"
-            className="w-full h-full object-contain"
-          />
-        </div>
-        <h3 className="text-base content-start w-full font-semibold">
-          {produto.name}
-        </h3>
-        <div className="text-sm font-bold mt-1 justify-between items-center w-full flex">
-          <p className="text-[20px] text-black">
+    <CarouselItem className="basis-[65%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+      <div className="rounded-lg h-66 relative border shadow-sm p-4 flex flex-col hover:shadow-md transition">
+        {/* Link cobre apenas imagem e nome */}
+        <Link
+          href={`/produtos/${produto.id}`}
+          className="block flex-1"
+          prefetch={true}
+        >
+          <div className="w-[180px] h-[160px] mb-2 overflow-hidden mx-auto">
+            <Image
+              src={produto.image}
+              alt={produto.name}
+              width={170}
+              height={170}
+              priority={true}
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <h3 className="text-base font-semibold truncate">{produto.name}</h3>
+        </Link>
+
+        {/* Linha com preço e botão sempre no mesmo nível */}
+        <div className="mt-auto flex justify-between items-center w-full">
+          <p className="text-[20px] text-black font-bold">
             {produto.price.toLocaleString("pt-BR", {
               style: "currency",
               currency: "BRL",
             })}
           </p>
           <Button className="bg-[#F38808] rounded-[15px]" variant={"default"}>
-            <IoAddSharp size={50} />
+            <IoAddSharp size={28} />
           </Button>
         </div>
       </div>
