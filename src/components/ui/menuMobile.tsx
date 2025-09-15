@@ -3,14 +3,12 @@ import { useCarrinho } from "@/store/carrinho";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { GoSearch } from "react-icons/go";
-import CarrinhoUI from "./carrinhoUI";
 import { IoCloseOutline } from "react-icons/io5";
-
 import { RiRestaurant2Fill } from "react-icons/ri";
 import { PiShoppingCartFill } from "react-icons/pi";
 import { TiHome } from "react-icons/ti";
 import clsx from "clsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const menuItems = [
   { href: "/", label: "Início", icon: <TiHome size={25} /> },
@@ -27,15 +25,25 @@ export default function MenuMobileFixed() {
   const { itens } = useCarrinho();
   const [clicked, setClicked] = useState<string | null>(null);
   const [carrinho, setCarrinho] = useState<boolean>(false);
+
   const handleCarrinhoClick = () => {
     setCarrinho(!carrinho);
-    console.log("Carrinho clicado - expandir menu");
   };
-  if (carrinho) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "scroll";
-  }
+
+  // 👇 só roda no cliente
+  useEffect(() => {
+    if (carrinho) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto"; // melhor que "scroll"
+    }
+
+    // reset ao desmontar
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [carrinho]);
+
   return (
     <>
       <div className="fixed bottom-0 z-50 w-full bg-white ring-4 ring-yellow-300 px-6 py-2 text-[#3e3e3e]">
@@ -64,7 +72,7 @@ export default function MenuMobileFixed() {
               );
             })}
 
-            {/* Carrinho como botão separado */}
+            {/* Carrinho */}
             <li>
               <button
                 onClick={handleCarrinhoClick}
@@ -77,6 +85,7 @@ export default function MenuMobileFixed() {
           </ul>
         </nav>
       </div>
+
       {carrinho && (
         <div className="bg-[#F3F3F3] flex justify-between flex-col h-[80vh] absolute z-50 w-full bottom-0">
           <div>itens</div>
