@@ -62,7 +62,15 @@ function ProductItem({ produto }: ProductItemProps) {
               currency: "BRL",
             })}
           </p>
-          <AdicionarButton productId={produto.id} />
+          <AdicionarButton
+            produto={{
+              id: produto.id,
+              name: produto.name,
+              price: produto.price,
+              image: produto.image,
+              qtde: 1,
+            }}
+          />
         </div>
       </div>
     </CarouselItem>
@@ -87,8 +95,8 @@ function CardapioSection({
 }: CardapioSectionProps) {
   return (
     <article id={id}>
-      <div className="px-4 py-6">
-        <h2 className="text-xl flex items-center justify-between font-bold mb-4">
+      <div className="pl-4 py-6">
+        <h2 className="text-xl pr-4 flex items-center justify-between font-bold mb-4">
           {titulo}
           {visibleCount <= produtos.length && (
             <button

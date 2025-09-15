@@ -13,6 +13,7 @@ import {
 interface LanchesPopularesProps {
   produtos: Product[];
 }
+
 import AdicionarButton from "./adicionarButton";
 export const revalidate = 600;
 
@@ -27,8 +28,8 @@ export default function LanchesPopulares({ produtos }: LanchesPopularesProps) {
 
   return (
     <article>
-      <div className="px-4 py-6">
-        <h2 className="text-xl flex items-center justify-between font-bold mb-4">
+      <div className="pl-4 py-6">
+        <h2 className="text-xl pr-4 flex items-center justify-between font-bold mb-4">
           Populares
           {visibleCount < produtos.length && (
             <button
@@ -78,7 +79,15 @@ export default function LanchesPopulares({ produtos }: LanchesPopularesProps) {
                         currency: "BRL",
                       })}
                     </p>
-                    <AdicionarButton productId={produto.id} />
+                    <AdicionarButton
+                      produto={{
+                        id: produto.id,
+                        name: produto.name,
+                        price: produto.price,
+                        image: produto.image,
+                        qtde: 1,
+                      }}
+                    />
                   </div>
                 </div>
               </CarouselItem>

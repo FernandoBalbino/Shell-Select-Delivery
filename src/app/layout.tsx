@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/ui/footer";
-
+import { Toaster } from "@/components/ui/sonner";
 // Fonts
 const plusJakartaSans = Plus_Jakarta_Sans({
   weight: "400",
@@ -42,6 +42,7 @@ export default function RootLayout({
       <body className="antialiased bg-white text-black">
         {children}
         <Footer />
+        <Toaster />
       </body>
     </html>
   );

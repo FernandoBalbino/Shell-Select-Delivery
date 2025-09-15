@@ -25,8 +25,8 @@ export default function BebidasPopulares({ produtos }: BebidasPopularesProps) {
   return (
     <>
       <article className="">
-        <div className="px-4   py-6">
-          <h2 className="text-xl flex items-center justify-between font-bold mb-4">
+        <div className="pl-4   py-6">
+          <h2 className="text-xl pr-4 flex items-center justify-between font-bold mb-4">
             Bebidas Populares
             {visibleCount < produtos.length && (
               <button
@@ -79,7 +79,15 @@ export default function BebidasPopulares({ produtos }: BebidasPopularesProps) {
                           currency: "BRL",
                         })}
                       </p>
-                      <AdicionarButton productId={lanche.id} />
+                      <AdicionarButton
+                        produto={{
+                          id: lanche.id,
+                          name: lanche.name,
+                          price: lanche.price,
+                          image: lanche.image,
+                          qtde: 1,
+                        }}
+                      />
                     </div>
                   </div>
                 </CarouselItem>
