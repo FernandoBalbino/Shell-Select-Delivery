@@ -7,6 +7,7 @@ import { GoSearch } from "react-icons/go";
 import { Product } from "@/components/functions/listproducts";
 import AdicionarButton from "@/components/ui/adicionarButton";
 import { useRef } from "react";
+import { useCarrinho } from "@/store/carrinho";
 interface propsProdutos {
   produtos: Product[];
 }
@@ -14,7 +15,7 @@ interface propsProdutos {
 export default function Search({ produtos }: propsProdutos) {
   const [result, setResult] = useState<Product[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
-
+  const { addItem } = useCarrinho();
   function buscarItem(value: string) {
     const valorDigitado = value
       .toLowerCase()
@@ -103,7 +104,15 @@ export default function Search({ produtos }: propsProdutos) {
                 </Link>
 
                 {/* Botão fora do link */}
-                <AdicionarButton productId={lanche.id} />
+                <AdicionarButton
+                  produto={{
+                    id: lanche.id,
+                    name: lanche.name,
+                    price: lanche.price,
+                    image: lanche.image,
+                    qtde: 1,
+                  }}
+                />
               </div>
             ))}
           </div>
