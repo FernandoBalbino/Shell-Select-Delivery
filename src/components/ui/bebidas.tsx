@@ -14,8 +14,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import { Button } from "./button";
-import { IoAddSharp } from "react-icons/io5";
+import AdicionarButton from "./adicionarButton";
 export default function BebidasPopulares({ produtos }: BebidasPopularesProps) {
   const [visibleCount, setVisibleCount] = useState(5);
   if (!produtos || produtos.length === 0) {
@@ -80,12 +79,7 @@ export default function BebidasPopulares({ produtos }: BebidasPopularesProps) {
                           currency: "BRL",
                         })}
                       </p>
-                      <Button
-                        className="bg-[#F38808] rounded-[15px]"
-                        variant={"default"}
-                      >
-                        <IoAddSharp size={28} />
-                      </Button>
+                      <AdicionarButton productId={lanche.id} />
                     </div>
                   </div>
                 </CarouselItem>

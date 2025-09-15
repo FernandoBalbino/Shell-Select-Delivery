@@ -16,8 +16,7 @@ import {
 interface LanchesProps {
   produtos: Product[];
 }
-import { Button } from "./button";
-import { IoAddSharp } from "react-icons/io5";
+import AdicionarButton from "./adicionarButton";
 export const revalidate = 120;
 
 export default function Lanches({ produtos }: LanchesProps) {
@@ -84,12 +83,7 @@ export default function Lanches({ produtos }: LanchesProps) {
                           currency: "BRL",
                         })}
                       </p>
-                      <Button
-                        className="bg-[#F38808] rounded-[15px]"
-                        variant={"default"}
-                      >
-                        <IoAddSharp size={28} />
-                      </Button>
+                      <AdicionarButton productId={lanche.id} />
                     </div>
                   </div>
                 </CarouselItem>

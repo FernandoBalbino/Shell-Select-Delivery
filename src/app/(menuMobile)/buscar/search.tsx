@@ -5,8 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { Product } from "@/components/functions/listproducts";
-import { IoAddSharp } from "react-icons/io5";
-import { Button } from "@/components/ui/button";
+import AdicionarButton from "@/components/ui/adicionarButton";
 import { useRef } from "react";
 interface propsProdutos {
   produtos: Product[];
@@ -104,13 +103,7 @@ export default function Search({ produtos }: propsProdutos) {
                 </Link>
 
                 {/* Botão fora do link */}
-                <Button
-                  className="bg-[#F38808]  rounded-[15px] flex-shrink-0"
-                  variant={"default"}
-                  size="sm"
-                >
-                  <IoAddSharp size={20} />
-                </Button>
+                <AdicionarButton productId={lanche.id} />
               </div>
             ))}
           </div>

@@ -5,8 +5,7 @@ import Link from "next/link";
 interface SecoesCardapioProps {
   produtos: Product[];
 }
-import { Button } from "@/components/ui/button";
-import { IoAddSharp } from "react-icons/io5";
+import AdicionarButton from "@/components/ui/adicionarButton";
 import {
   Carousel,
   CarouselContent,
@@ -63,9 +62,7 @@ function ProductItem({ produto }: ProductItemProps) {
               currency: "BRL",
             })}
           </p>
-          <Button className="bg-[#F38808] rounded-[15px]" variant={"default"}>
-            <IoAddSharp size={28} />
-          </Button>
+          <AdicionarButton productId={produto.id} />
         </div>
       </div>
     </CarouselItem>
