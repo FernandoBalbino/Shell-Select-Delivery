@@ -14,7 +14,7 @@ interface AdicionarButtonProps {
   produto: Carrinho;
 }
 export default function AdicionarButton({ produto }: AdicionarButtonProps) {
-  const { addItem } = useCarrinho();
+  const { addItem, abrirCarrinho } = useCarrinho();
   return (
     <>
       <Button
@@ -24,11 +24,11 @@ export default function AdicionarButton({ produto }: AdicionarButtonProps) {
           addItem(produto);
           toast("Produto adicionado com sucesso!", {
             position: "top-right",
+            duration: 800,
           });
         }}
       >
-        <IoAddSharp size={28} />
-        <span>Adicionar</span>
+        <span>Comprar</span>
       </Button>
     </>
   );

@@ -48,7 +48,7 @@ export default function ProdutoIsolado({ produto }: ProdutoIsoladoProps) {
 
             {/* Contador de Quantidade */}
             <div className="flex items-center bg-gradient-to-bl from-yellow-400 to-orange-500 rounded-full">
-              <button className="text-white p-2 hover:bg-pink-500 rounded-full transition-colors">
+              <button className="text-white p-2 rounded-full transition-colors">
                 <svg
                   className="w-4 h-4"
                   fill="none"
@@ -64,7 +64,7 @@ export default function ProdutoIsolado({ produto }: ProdutoIsoladoProps) {
                 </svg>
               </button>
               <span className="text-white px-3 font-semibold">1</span>
-              <button className="text-white p-2 hover:bg-pink-500 rounded-full transition-colors">
+              <button className="text-white p-2  rounded-full transition-colors">
                 <svg
                   className="w-4 h-4"
                   fill="none"

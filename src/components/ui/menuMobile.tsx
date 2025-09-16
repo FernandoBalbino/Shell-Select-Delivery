@@ -9,7 +9,7 @@ import { PiShoppingCartFill } from "react-icons/pi";
 import { TiHome } from "react-icons/ti";
 import clsx from "clsx";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 const menuItems = [
   { href: "/", label: "Início", icon: <TiHome size={25} /> },
@@ -23,27 +23,26 @@ const menuItems = [
 
 export default function MenuMobileFixed() {
   const pathname = usePathname();
-  const { itens } = useCarrinho();
-  const [clicked, setClicked] = useState<string | null>(null);
-  const [carrinho, setCarrinho] = useState<boolean>(false);
+  const {
+    itens,
+    aberto,
+    abrirCarrinho,
+    fecharCarrinho,
+    totalPreco,
+    totalItens,
+    aumentarQtde,
+    diminuirQtde,
+    removeItem,
+  } = useCarrinho();
+  const isCarrinhoOpen = aberto;
 
-  const handleCarrinhoClick = () => {
-    setCarrinho(!carrinho);
-  };
-
-  // 👇 só roda no cliente
+  // Bloquear scroll quando o carrinho abrir
   useEffect(() => {
-    if (carrinho) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto"; // melhor que "scroll"
-    }
-
-    // reset ao desmontar
+    document.body.style.overflow = isCarrinhoOpen ? "hidden" : "auto";
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [carrinho]);
+  }, [isCarrinhoOpen]);
 
   return (
     <>
@@ -51,14 +50,13 @@ export default function MenuMobileFixed() {
         <nav className="w-full">
           <ul className="flex justify-between w-full">
             {menuItems.map((item) => {
-              const isActive = pathname === item.href || clicked === item.href;
+              const isActive = pathname === item.href;
 
               return (
                 <li key={item.href}>
                   <Link
                     href={item.href}
                     prefetch
-                    onClick={() => setClicked(item.href)}
                     className={clsx(
                       "flex flex-col items-center transition-colors",
                       isActive
@@ -76,7 +74,7 @@ export default function MenuMobileFixed() {
             {/* Carrinho */}
             <li className="relative">
               <button
-                onClick={handleCarrinhoClick}
+                onClick={isCarrinhoOpen ? fecharCarrinho : abrirCarrinho}
                 className="flex flex-col items-center transition-colors text-[#3e3e3e] hover:text-yellow-500"
               >
                 <PiShoppingCartFill size={25} />
@@ -89,13 +87,14 @@ export default function MenuMobileFixed() {
           </ul>
         </nav>
       </div>
-      {carrinho && (
+
+      {isCarrinhoOpen && (
         <div className="fixed inset-0 z-50 bg-[#F3F3F3] flex flex-col justify-between overflow-auto">
           {/* Cabeçalho */}
           <div className="p-4 flex justify-center relative">
             <h2 className="text-[28px] font-semibold">Carrinho</h2>
             <div
-              onClick={handleCarrinhoClick}
+              onClick={fecharCarrinho}
               className="absolute right-5 top-4 bg-white rounded-full p-2 border cursor-pointer"
             >
               <IoCloseOutline size={28} />
@@ -107,11 +106,17 @@ export default function MenuMobileFixed() {
             {itens.length === 0 ? (
               <p className="text-center text-gray-400 mt-10">Carrinho vazio</p>
             ) : (
-              itens.map((item, i) => (
+              itens.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-white rounded-xl flex items-center p-4 shadow-md"
+                  className="bg-white relative repeat-0 rounded-xl flex items-center p-4 shadow-md"
                 >
+                  <div
+                    onClick={() => removeItem(item.id)}
+                    className="absolute  top-2 right-2"
+                  >
+                    <IoCloseOutline size={22} />
+                  </div>
                   <Image
                     src={item.image}
                     width={70}
@@ -122,17 +127,53 @@ export default function MenuMobileFixed() {
                   />
                   <div className="ml-4 flex-1">
                     <h3 className="font-medium text-lg">{item.name}</h3>
-                    <p className="text-gray-400 text-sm">${item.price}/item</p>
+                    <p className="text-gray-400 text-sm">R${item.price}/item</p>
                     <p className="font-semibold text-base">
-                      ${item.price * item.qtde}
+                      R${item.price * item.qtde}
                     </p>
                   </div>
 
                   {/* Botões de quantidade */}
-                  <div className="flex items-center border rounded-lg p-1">
-                    <button className="px-3 text-lg">-</button>
-                    <span className="px-3">{item.qtde}</span>
-                    <button className="px-3 text-lg">+</button>
+                  <div className="flex items-center bg-gradient-to-bl from-yellow-400 to-orange-500 rounded-full">
+                    <button
+                      onClick={() => diminuirQtde(item.id)}
+                      className="text-white p-2 rounded-full transition-colors"
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M20 12H4"
+                        />
+                      </svg>
+                    </button>
+                    <span className="text-white px-3 font-semibold">
+                      {item.qtde}
+                    </span>
+                    <button
+                      onClick={() => aumentarQtde(item.id)}
+                      className="text-white p-2  rounded-full transition-colors"
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 4v16m8-8H4"
+                        />
+                      </svg>
+                    </button>
                   </div>
                 </div>
               ))
@@ -142,8 +183,12 @@ export default function MenuMobileFixed() {
           {/* Footer do carrinho */}
           <div className="p-5 bg-white rounded-t-4xl shadow-lg">
             <div className="flex justify-between items-center mb-4">
-              <span className="font-medium">Total a pagar (4) :</span>
-              <span className="font-bold text-lg">$46.00</span>
+              <span className="font-medium">
+                Total a pagar ({totalItens()}) :
+              </span>
+              <span className="font-bold text-lg">
+                R${totalPreco().toFixed(2)}
+              </span>
             </div>
             <button className="w-full shadow-md bg-gradient-to-bl from-yellow-400 to-orange-500 text-white p-4 rounded-lg font-semibold">
               Pagar
