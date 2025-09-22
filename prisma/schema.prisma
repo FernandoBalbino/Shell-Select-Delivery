@@ -33,5 +33,6 @@ model Order {
   id        String   @id @default(cuid())
   customer  String
   items     Json
+  total Float
   createdAt DateTime @default(now())
 }
